@@ -177,3 +177,12 @@ This project is open source. Feel free to modify and distribute.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+
+
+## 🙏 Support My Work
+
+If you find this project useful, consider supporting it by donating via UPI.
+
+![Donate via UPI](upi-donation.png)
+
+Thank you for your support! ❤️
