@@ -12,7 +12,7 @@ wheels = [
 ]
 
 [[package]]
-name = "ytdl"
+name = "ytdl-python"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

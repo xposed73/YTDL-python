@@ -6,9 +6,10 @@ A Python-based YouTube video downloader that converts videos to MP3 audio files 
 
 - 🎵 **Audio Extraction**: Downloads YouTube videos and converts them to MP3 format
 - 📝 **Batch Processing**: Processes multiple URLs from a text file
-- 🎯 **High Quality**: Downloads best available audio quality
+- 🎯 **High Quality**: Downloads best available audio quality (192kbps MP3)
 - 🛡️ **Error Handling**: Continues processing even if individual downloads fail
-- 📁 **Organized Output**: Files are saved with video titles as filenames
+- 📁 **Organized Output**: Files are automatically saved in a `downloads` folder
+- 🔄 **Automatic Conversion**: Converts audio to MP3 format using FFmpeg
 
 ## Prerequisites
 
@@ -58,7 +59,7 @@ pip install uv
 1. **Clone or download this repository**:
    ```bash
    git clone https://github.com/xposed73/YTDL-python.git
-   cd ytdl
+   cd YTDL-python
    ```
 
 2. **Create and activate virtual environment**:
@@ -69,7 +70,7 @@ pip install uv
 
 3. **Verify installation**:
    ```bash
-   uv run main.py
+   uv run app.py
    ```
 
 ## Usage
@@ -84,22 +85,27 @@ https://www.youtube.com/watch?v=VIDEO_ID_3
 
 ### 2. Run the Downloader
 ```bash
-uv run main.py
+uv run app.py
 ```
 
 The script will:
+- Create a `downloads` folder if it doesn't exist
 - Read URLs from `urls.txt`
 - Download each video's audio
 - Convert to MP3 format (192kbps quality)
-- Save files in the current directory with video titles as filenames
+- Save files in the `downloads` folder with video titles as filenames
+- Display progress and completion status
 
-### 3. Customize Settings (Optional)
+### 3. Find Your Files
+All downloaded MP3 files will be saved in the `downloads/` folder in your project directory.
+
+### 4. Customize Settings (Optional)
 You can modify the download options in `main.py`:
 
 ```python
 options = {
     'format': 'bestaudio/best',        # Audio quality
-    'outtmpl': '%(title)s.%(ext)s',    # Output filename template
+    'outtmpl': os.path.join(downloads_dir, '%(title)s.%(ext)s'),  # Output filename template
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'mp3',       # Output format
@@ -113,9 +119,10 @@ options = {
 ## Project Structure
 
 ```
-ytdl/
+YTDL-python/
 ├── main.py           # Main download script
 ├── urls.txt          # List of YouTube URLs to download
+├── downloads/        # Downloaded MP3 files (created automatically)
 ├── pyproject.toml    # Project configuration
 ├── uv.lock          # Dependency lock file
 ├── README.md        # This file
@@ -145,7 +152,12 @@ ytdl/
    - Check your internet connection
    - Verify YouTube URLs are valid
 
-4. **UV installation issues**:
+4. **Files not appearing in downloads folder**:
+   - Check that the script completed successfully
+   - Verify the `downloads` folder was created
+   - Look for any error messages during download
+
+5. **UV installation issues**:
    - Try installing via pip: `pip install uv`
    - Or download from [uv releases](https://github.com/astral-sh/uv/releases)
 
@@ -156,6 +168,7 @@ If you encounter issues:
 2. Verify FFmpeg is in your system PATH
 3. Ensure you're using Python 3.13+
 4. Check the error messages for specific details
+5. Verify the `downloads` folder exists and has proper permissions
 
 ## License
 
